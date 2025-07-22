@@ -101,3 +101,85 @@ PreferredSizeWidget customAppBar({
     bottom: bottom,
   );
 }
+
+
+
+class CustomBox extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color backgroundColor;
+  final VoidCallback? onTap;
+  final double borderRadius;
+  final double height;
+  final double width;
+
+  const CustomBox({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    this.backgroundColor = Colors.white,
+    this.onTap,
+    this.borderRadius = 16,
+    this.height = 150,
+    this.width = 150,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.15),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            // Icon in the top right corner
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Icon(icon, size: 24, color: Colors.grey[700]),
+            ),
+
+            // Texts centered vertically
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 30), // Space below icon
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

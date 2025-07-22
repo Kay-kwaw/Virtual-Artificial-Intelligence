@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../constants/reusable_button.dart';
-import '../constants/reusable_tabbar_screen.dart';
 
 class Aiassistance extends StatelessWidget {
   const Aiassistance({super.key});
@@ -11,7 +10,7 @@ class Aiassistance extends StatelessWidget {
       length: 5,
       child: Scaffold(
         appBar: customAppBar(
-          title: 'AI Assistance',
+          title: 'AI Assistants',
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           imagePath: logoPath,
           fontFamily: 'Figtree-semibold',
@@ -32,7 +31,13 @@ class Aiassistance extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: const TabBarView(
           children: [
-            Center(child: Text('Page 1')),
+            Column(
+              children: [
+                   ReusebaleText(text: 'Writings', fontSize: 16, textAlign: TextAlign.right, fontWeight: FontWeight.w500, fontFamily: 'Figtree-semibold',),
+                   SizedBox(height: 10,),
+                   CustomBox(icon: Icons.book, title: 'Writing Articles', subtitle: 'subtitle')
+              ],
+            ),
             Center(child: Text('Page 2')),
             Center(child: Text('Page 3')),
             Center(child: Text('Page 4')),
