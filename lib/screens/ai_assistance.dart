@@ -29,13 +29,34 @@ class Aiassistance extends StatelessWidget {
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        body: const TabBarView(
+        body:  TabBarView(
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                   ReusebaleText(text: 'Writings', fontSize: 16, textAlign: TextAlign.right, fontWeight: FontWeight.w500, fontFamily: 'Figtree-semibold',),
-                   SizedBox(height: 10,),
-                   CustomBox(icon: Icons.book, title: 'Writing Articles', subtitle: 'subtitle')
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ReusebaleText(text: 'Writings', fontSize: 16, textAlign: TextAlign.left, fontWeight: FontWeight.w500, fontFamily: 'Figtree-semibold',),
+                ),
+                SizedBox(height: 10,),
+                Expanded(
+                  child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  padding: EdgeInsets.all(16),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    CustomBox(icon: Icons.book, title: 'Writing Articles', subtitle: 'subtitle'),
+                    CustomBox(icon: Icons.edit, title: 'Editing', subtitle: 'subtitle'),
+                    CustomBox(icon: Icons.lightbulb, title: 'Ideas', subtitle: 'subtitle'),
+                    CustomBox(icon: Icons.business, title: 'Business Plan', subtitle: 'subtitle'),
+                    CustomBox(icon: Icons.people, title: 'Networking', subtitle: 'subtitle'),
+                    CustomBox(icon: Icons.share, title: 'Sharing', subtitle: 'subtitle'),
+                  ],
+                            ),
+                ),
               ],
             ),
             Center(child: Text('Page 2')),

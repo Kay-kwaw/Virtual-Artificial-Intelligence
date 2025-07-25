@@ -151,7 +151,14 @@ class CustomBox extends StatelessWidget {
             Positioned(
               top: 0,
               left: 0,
-              child: Icon(icon, size: 24, color: Colors.grey[700]),
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, size: 24, color: Colors.white)),
             ),
 
             // Texts centered vertically
@@ -159,7 +166,7 @@ class CustomBox extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 30), // Space below icon
+                const SizedBox(height: 60), // Space below icon
                 Text(
                   title,
                   style: const TextStyle(
