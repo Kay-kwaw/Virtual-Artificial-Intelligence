@@ -17,14 +17,27 @@ class ReusableButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: color,
+    return Material(
+      color: color,
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: InkWell(
         borderRadius: BorderRadius.circular(borderRadius),
+        onTap: onPressed,
+        child: Container(
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: textColor,
+              fontSize: fontSize,
+              fontWeight: FontWeight.normal,
+              fontFamily: fontFamily,
+            ),
+          ),
+        ),
       ),
-      child: Center(child: Text(text, style: TextStyle(color: textColor, fontSize: fontSize, fontWeight: FontWeight.normal, fontFamily: fontFamily),)),
     );
   }
 }
@@ -34,7 +47,7 @@ class ReusebaleText extends StatelessWidget {
   final Color color;
   final double fontSize;
   final FontWeight fontWeight;
-  final TextAlign textAlign;
+  // final TextAlign textAlign;
   final String fontFamily;
   
   const ReusebaleText({
@@ -43,7 +56,7 @@ class ReusebaleText extends StatelessWidget {
     this.color = Colors.black,
     required this.fontSize,
     required this.fontWeight,
-    required this.textAlign,
+    // required this.textAlign,
     this.fontFamily = 'Figtree',
   });
 
@@ -58,7 +71,7 @@ class ReusebaleText extends StatelessWidget {
           // fontWeight: fontWeight,
           fontFamily: fontFamily,
         ),
-        textAlign: textAlign,
+        // textAlign: textAlign,
       ),
     );
   }
