@@ -1,3 +1,4 @@
+import 'package:authentication_trials/screens/ai_assistants_screen.dart/writings.dart';
 import 'package:flutter/material.dart';
 import '../constants/reusable_button.dart';
 
@@ -49,7 +50,11 @@ class Aiassistance extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      CustomBox(icon: Icons.book, title: 'Writing Articles', subtitle: 'General well-written articles on any topic you'),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WritingsPage()));
+                        },
+                        child: CustomBox(icon: Icons.book, title: 'Writing Articles', subtitle: 'General well-written articles on any topic you')),
                       CustomBox(icon: Icons.school, title: 'Acadamic Writings', subtitle: 'Generate educational writing such as essays,'),
                     ],
                   ),

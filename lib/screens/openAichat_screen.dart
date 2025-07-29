@@ -1,5 +1,9 @@
 // ignore: file_names
+import 'dart:convert';
+
+import 'package:authentication_trials/constants/openai_key.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class AIChatPage extends StatefulWidget {
   const AIChatPage({Key? key}) : super(key: key);
@@ -11,10 +15,33 @@ class AIChatPage extends StatefulWidget {
 class _AIChatPageState extends State<AIChatPage> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> messages = [
-    {'role': 'ai', 'content': 'Hello! How can I assist you today?'},
-    {'role': 'user', 'content': 'Can you help me write an email?'},
-    {'role': 'ai', 'content': 'Of course! What is the subject of your email?'},
+      // {'role': 'ai', 'content': 'Hello! How can I assist you today?'},
+      // {'role': 'user', 'content': 'Can you help me write an email?'},
+      // {'role': 'ai', 'content': 'Of course! What is the subject of your email?'},
   ];
+
+  Future<String> fetchOpenAIResponse(String message) async {
+    final response = await http.post(
+      Uri.parse('https://api.openai.com/v1/chat/completions'),
+      headers: {
+        'Authorization': 'Bearer $openaiKey',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'model': 'gpt-3.5-turbo',
+        'messages': [
+          {'role': 'user', 'content': message},
+        ],
+      }),
+    );
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['choices'][0]['message']['content'] as String;
+    } else {
+      print('OpenAI API Error: ${response.statusCode} ${response.body}');
+      throw Exception('Failed to load AI response');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +104,25 @@ class _AIChatPageState extends State<AIChatPage> {
                   const SizedBox(width: 8),
                   IconButton(
                     icon: const Icon(Icons.send, color: Colors.black),
-                    onPressed: () {}, // No logic, UI only
+                    onPressed: () async {
+                      final message = _controller.text.trim();
+                      if (message.isNotEmpty) {
+                        setState(() {
+                          messages.add({'role': 'user', 'content': message});
+                          _controller.clear();
+                        });
+                      }
+                      try {
+                        final response = await fetchOpenAIResponse(message);
+                        setState(() {
+                          messages.add({'role': 'ai', 'content': response});
+                        });
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error: $e')),
+                        );
+                      }
+                    }, // No logic, UI only
                   ),
                 ],
               ),

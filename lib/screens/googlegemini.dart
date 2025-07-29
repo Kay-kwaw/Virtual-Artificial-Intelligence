@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:authentication_trials/constants/openai_key.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class GoogleGeminiAi extends StatefulWidget {
-  const GoogleGeminiAi({Key? key}) : super(key: key);
+  const GoogleGeminiAi({super.key});
 
   @override
   State<GoogleGeminiAi> createState() => _GoogleGeminiAiState();
@@ -9,11 +13,32 @@ class GoogleGeminiAi extends StatefulWidget {
 
 class _GoogleGeminiAiState extends State<GoogleGeminiAi> {
   final TextEditingController _controller = TextEditingController();
-  final List<Map<String, String>> messages = [
-    {'role': 'ai', 'content': 'Hello! How can I assist you today?'},
-    {'role': 'user', 'content': 'Can you help me write an email?'},
-    {'role': 'ai', 'content': 'Of course! What is the subject of your email?'},
-  ];
+  final List<Map<String, String>> messages = [];
+
+  Future<String> fetchGeminiResponse(String message) async {
+    final response = await http.post(
+      Uri.parse('https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=$geminiApiKey'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'contents': [
+          {
+            'parts': [
+              {'text': message}
+            ]
+          }
+        ]
+      }),
+    );
+    if (response.statusCode == 200) { 
+      final data = jsonDecode(response.body);
+      return data['candidates'][0]['content']['parts'][0]['text'] as String;
+    } else {
+      print('Gemini API Error: ${response.statusCode} ${response.body}');
+      throw Exception('Failed to load AI response: ${response.body}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +101,29 @@ class _GoogleGeminiAiState extends State<GoogleGeminiAi> {
                   const SizedBox(width: 8),
                   IconButton(
                     icon: const Icon(Icons.send, color: Colors.black),
-                    onPressed: () {}, // No logic, UI only
+                    onPressed: () async {
+                      final message = _controller.text.trim();
+                      if (message.isNotEmpty) {
+                        setState(() {
+                          messages.add({'role': 'user', 'content': message});
+                          _controller.clear();
+                        });
+                        
+                        try {
+                          final response = await fetchGeminiResponse(message);
+                          setState(() {
+                            messages.add({'role': 'ai', 'content': response});
+                          });
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Error: $e'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      }
+                    },
                   ),
                 ],
               ),
