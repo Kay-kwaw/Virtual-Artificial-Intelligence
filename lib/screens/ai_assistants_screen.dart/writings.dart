@@ -18,13 +18,14 @@ class _WritingsPageState extends State<WritingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Writings'),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 1,
-      ),
+      backgroundColor: const Color.fromARGB(255, 241, 241, 241),
+      // appBar: AppBar(
+      //   title: const Text('Writings'),
+      //   centerTitle: true,
+      //   backgroundColor: Colors.white,
+      //   foregroundColor: Colors.black,
+      //   elevation: 1,
+      // ),
       body: SafeArea(
         child: Column(
           children: [
@@ -67,16 +68,14 @@ class _WritingsPageState extends State<WritingsPage> {
                       controller: _controller,
                       decoration: const InputDecoration(
                         hintText: 'Type your message...',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                        ),
+                        border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       ),
                     ),
                   ),
                   const SizedBox(width: 8),
                   IconButton(
-                    icon: const Icon(Icons.send, color: Colors.blue),
+                    icon: const Icon(Icons.send, color: Colors.black),
                     onPressed: () {}, // No logic, UI only
                   ),
                 ],

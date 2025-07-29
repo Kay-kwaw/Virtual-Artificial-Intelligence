@@ -1,3 +1,6 @@
+import 'package:authentication_trials/screens/ai_assistants_screen.dart/business.dart';
+import 'package:authentication_trials/screens/ai_assistants_screen.dart/creative.dart';
+import 'package:authentication_trials/screens/ai_assistants_screen.dart/social_media.dart';
 import 'package:authentication_trials/screens/ai_assistants_screen.dart/writings.dart';
 import 'package:flutter/material.dart';
 import '../constants/reusable_button.dart';
@@ -55,7 +58,11 @@ class Aiassistance extends StatelessWidget {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => WritingsPage()));
                         },
                         child: CustomBox(icon: Icons.book, title: 'Writing Articles', subtitle: 'General well-written articles on any topic you')),
-                      CustomBox(icon: Icons.school, title: 'Acadamic Writings', subtitle: 'Generate educational writing such as essays,'),
+                      InkWell(
+                        onTap: () {
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => AcadamicWritingsPage()));
+                        },
+                        child: CustomBox(icon: Icons.school, title: 'Acadamic Writings', subtitle: 'Generate educational writing such as essays,')),
                     ],
                   ),
                   // Text in between rows
@@ -79,8 +86,16 @@ class Aiassistance extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      CustomBox(icon: Icons.lightbulb, title: 'Ideas', subtitle: 'Generate Ideas from any music genre you want.'),
-                      CustomBox(icon: Icons.business, title: 'Storyteller', subtitle: 'Generate a story from any topic you want.'),
+                      InkWell(
+                        onTap: () {
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => IdeasPage()));
+                        },
+                        child: CustomBox(icon: Icons.lightbulb, title: 'Ideas', subtitle: 'Generate Ideas from any music genre you want.')),
+                      InkWell(
+                        onTap: () {
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => StorytellerPage()));
+                        },
+                        child: CustomBox(icon: Icons.business, title: 'Storyteller', subtitle: 'Generate a story from any topic you want.')),
                     ],
                   ),
                   Padding(
@@ -102,8 +117,12 @@ class Aiassistance extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      CustomBox(icon: Icons.lightbulb, title: 'Email Writer', subtitle: 'Generate a well-written email for any purpose you want.'),
-                      CustomBox(icon: Icons.business, title: 'Business Plan', subtitle: 'Generate a business plan for any business you want.'),
+                      InkWell(
+                        onTap: () {},
+                        child: CustomBox(icon: Icons.lightbulb, title: 'Email Writer', subtitle: 'Generate a well-written email for any purpose you want.')),
+                      InkWell(
+                        onTap: () {},
+                        child: CustomBox(icon: Icons.business, title: 'Business Plan', subtitle: 'Generate a business plan for any business you want.')),
                     ],
                   ),
                   Padding(
@@ -125,17 +144,21 @@ class Aiassistance extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      CustomBox(icon: Icons.people, title: 'Networking', subtitle: 'Find and connect with professionals.'),
-                      CustomBox(icon: Icons.share, title: 'Sharing', subtitle: 'Share your content easily.'),
+                      InkWell(
+                        onTap: () {},
+                        child: CustomBox(icon: Icons.people, title: 'Networking', subtitle: 'Find and connect with professionals.')),
+                      InkWell(
+                        onTap: () {},
+                        child: CustomBox(icon: Icons.share, title: 'Sharing', subtitle: 'Share your content easily.')),
                     ],
                   ),
                 ],
               ),
             ),
-            Center(child: Text('Page 2')),
-            Center(child: Text('Page 3')),
-            Center(child: Text('Page 4')),
-            Center(child: Text('Page 5')),
+            Center(child: WritingsPage()),
+            Center(child: CreativePage()),
+            Center(child: BusinessPage()),
+            Center(child: SocialMedia()),
           ],
         ),
       ),
