@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
 
-class SocialMedia extends StatefulWidget {
-  const SocialMedia({super.key});
+class WritingsPageArticles extends StatefulWidget {
+  const WritingsPageArticles({super.key});
 
   @override
-  State<SocialMedia> createState() => _SocialMediaState();
+  State<WritingsPageArticles> createState() => _WritingsPageArticlesState();
 }
 
-class _SocialMediaState extends State<SocialMedia> {
+class _WritingsPageArticlesState extends State<WritingsPageArticles> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> messages = [
-    {'role': 'ai', 'content': 'Hello! How can I assist you today?'},
-    {'role': 'user', 'content': 'Can you help me write an email?'},
-    {'role': 'ai', 'content': 'Of course! What is the subject of your email?'},
+    {'role': 'ai', 'content': 'Hello! How can I assist you today with writing articles?'},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 241, 241),
-      // appBar: AppBar(
-      //   title: const Text('Writings'),
-      //   centerTitle: true,
-      //   backgroundColor: Colors.white,
-      //   foregroundColor: Colors.black,
-      //   elevation: 1,
-      // ),
+      appBar: AppBar(
+        title: const Text('Writings'),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 1,
+      ),
       body: SafeArea(
         child: Column(
           children: [

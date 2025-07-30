@@ -2,8 +2,13 @@ import 'package:authentication_trials/screens/ai_assistants_screen.dart/business
 import 'package:authentication_trials/screens/ai_assistants_screen.dart/creative.dart';
 import 'package:authentication_trials/screens/ai_assistants_screen.dart/social_media.dart';
 import 'package:authentication_trials/screens/ai_assistants_screen.dart/writings.dart';
+import 'package:authentication_trials/screens/writings/acadamic_writings.dart';
+import 'package:authentication_trials/screens/writings/writing_articles.dart';
 import 'package:flutter/material.dart';
 import '../constants/reusable_button.dart';
+
+
+
 
 class Aiassistance extends StatelessWidget {
   const Aiassistance({super.key});
@@ -55,12 +60,12 @@ class Aiassistance extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => WritingsPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WritingsPageArticles()));
                         },
                         child: CustomBox(icon: Icons.book, title: 'Writing Articles', subtitle: 'General well-written articles on any topic you')),
                       InkWell(
                         onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => AcadamicWritingsPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WritingsPageAcadamics()));
                         },
                         child: CustomBox(icon: Icons.school, title: 'Acadamic Writings', subtitle: 'Generate educational writing such as essays,')),
                     ],
