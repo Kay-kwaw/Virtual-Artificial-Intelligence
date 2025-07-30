@@ -6,6 +6,9 @@ import 'package:authentication_trials/screens/writings/acadamic_writings.dart';
 import 'package:authentication_trials/screens/writings/writing_articles.dart';
 import 'package:flutter/material.dart';
 import '../constants/reusable_button.dart';
+import 'business/email.dart';
+import 'business/business_plan.dart';
+
 
 
 
@@ -123,10 +126,14 @@ class Aiassistance extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => EmailUI()));
+                        },
                         child: CustomBox(icon: Icons.lightbulb, title: 'Email Writer', subtitle: 'Generate a well-written email for any purpose you want.')),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessPlan()));
+                        },
                         child: CustomBox(icon: Icons.business, title: 'Business Plan', subtitle: 'Generate a business plan for any business you want.')),
                     ],
                   ),
