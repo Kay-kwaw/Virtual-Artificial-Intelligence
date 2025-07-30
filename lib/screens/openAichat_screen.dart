@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class AIChatPage extends StatefulWidget {
-  const AIChatPage({Key? key}) : super(key: key);
+  const AIChatPage({super.key});
 
   @override
   State<AIChatPage> createState() => _AIChatPageState();
@@ -21,7 +21,8 @@ class _AIChatPageState extends State<AIChatPage> {
   ];
 
   Future<String> fetchOpenAIResponse(String message) async {
-    final response = await http.post(
+    try {
+      final response = await http.post(
       Uri.parse('https://api.openai.com/v1/chat/completions'),
       headers: {
         'Authorization': 'Bearer $openaiKey',
@@ -37,9 +38,21 @@ class _AIChatPageState extends State<AIChatPage> {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       return data['choices'][0]['message']['content'] as String;
-    } else {
-      print('OpenAI API Error: ${response.statusCode} ${response.body}');
-      throw Exception('Failed to load AI response');
+          } else {
+        print('OpenAI API Error: ${response.statusCode} ${response.body}');
+        if (response.statusCode == 401) {
+          throw Exception('Invalid API key. Please check your OpenAI API key.');
+        } else if (response.statusCode == 429) {
+          throw Exception('Rate limit exceeded. Please try again later.');
+        } else {
+          throw Exception('Failed to load AI response (Status: ${response.statusCode})');
+        }
+      }
+    } catch (e) {
+      if (e.toString().contains('SocketException')) {
+        throw Exception('Network error: Please check your internet connection.');
+      }
+      rethrow;
     }
   }
 
