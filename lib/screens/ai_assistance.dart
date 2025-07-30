@@ -2,6 +2,10 @@ import 'package:authentication_trials/screens/ai_assistants_screen.dart/business
 import 'package:authentication_trials/screens/ai_assistants_screen.dart/creative.dart';
 import 'package:authentication_trials/screens/ai_assistants_screen.dart/social_media.dart';
 import 'package:authentication_trials/screens/ai_assistants_screen.dart/writings.dart';
+import 'package:authentication_trials/screens/creative/ideas.dart';
+import 'package:authentication_trials/screens/creative/storyteller.dart';
+import 'package:authentication_trials/screens/socialmedia/networking.dart';
+import 'package:authentication_trials/screens/socialmedia/sharing.dart';
 import 'package:authentication_trials/screens/writings/acadamic_writings.dart';
 import 'package:authentication_trials/screens/writings/writing_articles.dart';
 import 'package:flutter/material.dart';
@@ -96,12 +100,12 @@ class Aiassistance extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => IdeasPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => IdeasPage()));
                         },
                         child: CustomBox(icon: Icons.lightbulb, title: 'Ideas', subtitle: 'Generate Ideas from any music genre you want.')),
                       InkWell(
                         onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => StorytellerPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => StorytellerPage()));
                         },
                         child: CustomBox(icon: Icons.business, title: 'Storyteller', subtitle: 'Generate a story from any topic you want.')),
                     ],
@@ -157,10 +161,14 @@ class Aiassistance extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => NetworkingPage()));
+                        },
                         child: CustomBox(icon: Icons.people, title: 'Networking', subtitle: 'Find and connect with professionals.')),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SharingPage()));
+                        },
                         child: CustomBox(icon: Icons.share, title: 'Sharing', subtitle: 'Share your content easily.')),
                     ],
                   ),
